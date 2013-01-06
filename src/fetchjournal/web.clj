@@ -2,12 +2,15 @@
   (:use [ring.adapter.jetty :only [run-jetty]]
         [compojure.core :only [defroutes GET POST]]
         [ring.middleware.params :only [wrap-params]]
-        [fetchjournal.text]))
+        [fetchjournal.text :only [make-note]]))
 
+(defn sloppy-check [text]
+    (if-not (= (str "|" text) "|") (make-note text)
+        (str "Error: please use "
+            "\"x-www-form-urlencoded\" data")))
 
 (defroutes routes
-    (GET "/" [foo bar] (make-note foo))
-    (POST "/poop" [postvar] (str postvar)))
+    (POST "/" [text] (sloppy-check text)))
 
 (defn -main [port]
     ;wrap-params allows us to exract parameter from requests
