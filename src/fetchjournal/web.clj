@@ -6,9 +6,8 @@
 
 
 (defroutes routes
-    (GET "/" [foo] (make-note foo))
-    (POST "/poop" [postvar] (str postvar)));(GET "/user/:id" [id]
-      ;  (str "<h1>Hello user " id "</h1>")))
+    (GET "/" [foo bar] (make-note foo))
+    (POST "/poop" [postvar] (str postvar)))
 
 (defn -main [port]
     ;wrap-params allows us to exract parameter from requests
