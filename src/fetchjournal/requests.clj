@@ -25,10 +25,14 @@
     (let [base-url "http://www.fetchnotes.com"]
         (join "/" [base-url "authors" username "notes"])))
 
-(defn upload-note [text]
-   (let [response
-        (client/post (notes-url secrets/username) {
+(defn send-request[text]
+    (client/post
+        (notes-url secrets/username)
+        {
         :accept :json,
-        :form-params (sign { :text text,:public_key secrets/public_key})
-        })]
+        :form-params (sign {:text text,:public_key secrets/public_key})
+        }))
+
+(defn upload-note [text]
+   (let [response (send-request text)]
    (response :body)))
