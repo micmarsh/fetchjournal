@@ -26,11 +26,9 @@
         (join "/" [base-url "authors" username "notes"])))
 
 (defn upload-note [text]
-   (str (client/post (notes-url secrets/username)
-        {:accept :json,
-        :form-params
-        (sign {
-            :text text
-            :public_key secrets/public_key
-            })
-        })))
+   (let [response
+        (client/post (notes-ul secrets/username) {
+        :accept :json,
+        :form-params (sign { :text text,:public_key secrets/public_key})
+        })]
+   (response :body)))
