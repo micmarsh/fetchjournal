@@ -2,10 +2,10 @@
   (:use [ring.adapter.jetty :only [run-jetty]]
         [compojure.core :only [defroutes GET POST]]
         [ring.middleware.params :only [wrap-params]]
-        [fetchjournal.text :only [make-note]]))
+        [fetchjournal.requests :only [upload-note]]))
 
 (defn sloppy-check [text]
-    (if-not (= (str "|" text) "|") (make-note text)
+    (if-not (= (str "|" text) "|") (upload-note text)
         (str "Error: please use "
             "\"x-www-form-urlencoded\" data")))
 

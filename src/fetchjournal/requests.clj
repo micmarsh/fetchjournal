@@ -1,10 +1,12 @@
 (ns fetchjournal.requests
-    :use [clj-http.client :as client ])
+    (:use   [clj-http.client :as client]
+            [clojure.string/join ]
+            [fetchjournal.text :only [make-note]]))
 
 
 (defn notes-url[username]
     (let [base-url "http://www.fetchnotes.com"]
-        (apply str (interpose "/" [base-url "authors" username "notes"]))
+        (join "/" [base-url "authors" username "notes"])))
 
 (defn upload-note [text]
-    (client/post))
+    (client/get "http://fetchnotes.com"))
