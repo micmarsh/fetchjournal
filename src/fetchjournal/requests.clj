@@ -27,7 +27,7 @@
 
 (defn upload-note [text]
    (let [response
-        (client/post (notes-ul secrets/username) {
+        (client/post (notes-url secrets/username) {
         :accept :json,
         :form-params (sign { :text text,:public_key secrets/public_key})
         })]
