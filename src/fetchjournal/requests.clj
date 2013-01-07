@@ -1,6 +1,6 @@
 (ns fetchjournal.requests
     (:use   [clj-http.client :as client]
-            [clojure.string/join ]
+            [clojure.string :only [join] ]
             [fetchjournal.text :only [make-note]]))
 
 
